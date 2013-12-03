@@ -37,7 +37,7 @@ angularFileUpload.service('$upload', ['$http', '$rootScope', function($http, $ro
 		config.transformRequest =  angular.identity;
 		
 		//if multiple files
-		if (angular.isArray(config.file)) {
+        if (angular.isArray(config.file)) {
             angular.forEach(config.file, function(i, e) {
               formData.append(config.fileFormDataName || 'file', i, i.name);
             });
