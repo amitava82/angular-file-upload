@@ -36,14 +36,16 @@ angularFileUpload.service('$upload', ['$http', '$rootScope', function($http, $ro
 		}
 		config.transformRequest =  angular.identity;
 		
-		//if multiple files
-        if (angular.isArray(config.file)) {
-            angular.forEach(config.file, function(i, e) {
-              formData.append(config.fileFormDataName || 'file', i, i.name);
-            });
-	    } else {
-	        formData.append(config.fileFormDataName || 'file', config.file, config.file.name);
-	    }
+    var fieldName = config.fileFormDataName || 'file';
+
+    //if multiple files
+    if (angular.isArray(config.file)) {
+      angular.forEach(config.file, function(i, e) {
+        formData.append(fieldName+e, i, i.name);
+      });
+    } else {
+      formData.append(fieldName, config.file, config.file.name);
+    }
 
 		formData['__setXHR_'] = function(xhr) {
 			config.__XHR = xhr;
